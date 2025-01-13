@@ -7,6 +7,7 @@ import cors from "cors"
 import authRouter from "./router/authRouter.js"
 import userRouter from "./router/userRouter.js"
 import clientRoute from "./router/clientRoute.js"
+import serviceRouter from "./router/serviceRouter.js"
 
 
 const app = express()
@@ -38,6 +39,9 @@ app.use('/api/user', userRouter)
 
 
 app.use('/api/client' , clientRoute)
+
+
+app.use('/api/service', serviceRouter)
 
 
 
