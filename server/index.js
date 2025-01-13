@@ -8,6 +8,7 @@ import authRouter from "./router/authRouter.js"
 import userRouter from "./router/userRouter.js"
 import clientRoute from "./router/clientRoute.js"
 import serviceRouter from "./router/serviceRouter.js"
+import projectRouter from "./router/projectRouter.js"
 
 
 const app = express()
@@ -42,6 +43,9 @@ app.use('/api/client' , clientRoute)
 
 
 app.use('/api/service', serviceRouter)
+
+
+app.use('/api/project', projectRouter)
 
 
 
