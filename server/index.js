@@ -5,6 +5,7 @@ import mongoose from "mongoose"
 import "dotenv/config"
 import cors from "cors"
 import authRouter from "./router/authRouter.js"
+import userRouter from "./router/userRouter.js"
 
 
 const app = express()
@@ -24,17 +25,22 @@ app.use(express.json())
 // DB CONNECTION
 mongoose.connect(process.env.MONGO_URL)
 .then(() => console.log("DB CONNECTED"))
+.catch((err) => console.log(err))
 
 
 
 // ROUTES
-app.use('/auth', authRouter)
+app.use('/api/auth', authRouter) 
+
+
+app.use('/api/user', userRouter)
 
 
 
 // API
 app.get('/',(req,res) => {
 
+    res.send("HELLO SIRE TECH SOLUTIONS")
 
 })
 
@@ -59,7 +65,7 @@ app.use((err,req,res,next) => {
 
     const statusCode = err.statusCode || 500
 
-    const message = err.message || "Internal Server Error"
+    const message = err.message || "Internal Server Erroror"
 
     res.status(statusCode).json({success:false , message:message})
 

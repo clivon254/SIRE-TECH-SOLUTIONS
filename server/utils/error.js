@@ -1,7 +1,7 @@
 
 
 
-export const errorHandler = async (statusCode,message) => {
+export const errorHandler = (statusCode,message) => {
 
     const error = new Error()
 

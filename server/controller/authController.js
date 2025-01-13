@@ -10,29 +10,31 @@ import nodemailer from "nodemailer"
 
 export const register = async (req,res,next) => {
 
+   
+    const {email,password,username} = req.body
+
+    if(!email || !password || !username || username === "" || password === "" || email === "")
+    {
+        return next(errorHandler(401, "Please fill all the fields"))
+    }
+
+    const isEmail = await User.findOne({email})
+
+    if(isEmail)
+    {
+        return next(errorHandler(400,"The email is already registered"))
+    }
+
+    const hashedPassword = bcryptjs.hashSync(password ,10)
+
+    const newUser = new User({
+        email,
+        password:hashedPassword,
+        username
+    })
+
     try
     {
-        const {email,password,username} = req.body
-
-        if(!email || !password || !username || username === "" || password === "" || email === "")
-        {
-            return next(errorHandler(401, "Please fill all the fields"))
-        }
-
-        const isEmail = await User.findOne({email})
-
-        if(isEmail)
-        {
-            return next(errorHandler(400,"The email is already registered"))
-        }
-
-        const hashedPassword = bcryptjs.hashSync(password ,10)
-
-        const newUser = new User({
-            email,
-            password:hashedPassword,
-            username
-        })
 
         newUser.save()
 
@@ -125,7 +127,7 @@ export const forgotPassword = async (req,res,next) => {
             }
         })
 
-        const url = process.env.JWT_SECRETE
+        const url = process.env.FRONTEND_URL
 
         var mailOptions = {
             from:"SIRE TECH SOLUTIONS",
