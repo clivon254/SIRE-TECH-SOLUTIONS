@@ -10,6 +10,7 @@ import clientRoute from "./router/clientRoute.js"
 import serviceRouter from "./router/serviceRouter.js"
 import projectRouter from "./router/projectRouter.js"
 import taskRouter from "./router/taskRouter.js"
+import testimonialRouter from "./router/testimonialRouter.js"
 
 
 const app = express()
@@ -44,6 +45,9 @@ app.use('/api/client' , clientRoute)
 
 
 app.use('/api/service', serviceRouter)
+
+
+app.use('/api/test', testimonialRouter)
 
 
 app.use('/api/project', projectRouter)

@@ -24,16 +24,10 @@ const taskSchema = new mongoose.Schema(
 
         activities:[
             {
-                type:
-                {
-                    type:String,
-                    default:"assigned",
-                    enum:["assigned","started","in progress","bug","completed","commented"]
-                },
+                type:{type:String, default:"assigned", enum:["assigned","started","in progress","bug","completed","commented"]},
                 activity:String,
                 date:{type:Date ,default:new Date()},
                 by:{type:mongoose.Schema.Types.ObjectId , ref:'User'}
-
             }
         ],
 

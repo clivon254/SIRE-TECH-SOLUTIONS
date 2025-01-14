@@ -10,7 +10,7 @@ export const createTask = async (req,res,next)=> {
         return next(errorHandler(403,"You are not allowed to create task"))
     }
 
-    const {userId} = req.userId
+    const userId = req.user.id
 
     const {title,team,stage,date,priority} = req.body
 
@@ -39,7 +39,9 @@ export const createTask = async (req,res,next)=> {
             activities:activity
         })
 
-        res.status(200).json({status:true , task})
+        await task.save()
+
+        res.status(200).json({success:true , task})
 
     }
     catch(error)
@@ -101,7 +103,7 @@ export const getTasks = async (req,res,next)=> {
 
 export const postTaskActivity = async (req,res,next)=> {
 
-    const {userId} = req.user
+    const userId = req.user.id
 
     const {type ,activity} = req.body
 
@@ -126,7 +128,7 @@ export const postTaskActivity = async (req,res,next)=> {
 
         await task.save()
 
-        res.status()
+        res.status(200).json({success:true ,message:"Activity posted"})
     }
     catch(error)
     {
@@ -137,7 +139,7 @@ export const postTaskActivity = async (req,res,next)=> {
 
 export const createSubTask = async (req,res,next)=> {
 
-    const {title,tag,date} = req.body
+    const {title,tag,date} = req.body 
 
     const {taskId} = req.params
 
@@ -152,7 +154,7 @@ export const createSubTask = async (req,res,next)=> {
     {
 
         const newSubTask = {
-            title,data,tag
+            title,date,tag
         }
 
         task.subTasks.push(newSubTask)

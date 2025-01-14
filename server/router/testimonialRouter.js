@@ -11,16 +11,16 @@ const testimonialRouter = express.Router()
 testimonialRouter.post('/add-test' , addTestimonial)
 
 
-testimonialRouter.get('/get-testId/testId', getTestimonial)
+testimonialRouter.get('/get-test/:testId', getTestimonial)
 
 
-testimonialRouter.get('/get-tests/testId', getTestimonials)
+testimonialRouter.get('/get-tests', getTestimonials)
 
 
-testimonialRouter.put('/update-test/testId',verifyToken, updateTestimonial)
+testimonialRouter.put('/update-test/:testId',verifyToken, updateTestimonial)
 
 
-testimonialRouter.delete('/delete-test/testId' , verifyToken, deleteTestimonial)
+testimonialRouter.delete('/delete-test/:testId' , verifyToken, deleteTestimonial)
 
 
 export default testimonialRouter

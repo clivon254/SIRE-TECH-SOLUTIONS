@@ -9,7 +9,7 @@ import { verifyToken } from "../utils/verify.js"
 const userRouter = express.Router()
 
 
-userRouter.get('/get-user/:userId', verifyToken ,getUser)
+userRouter.get('/get-user/:userId',getUser)
 
 
 userRouter.get('/get-users', verifyToken, getUsers)

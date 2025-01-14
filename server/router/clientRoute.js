@@ -14,19 +14,19 @@ clientRoute.post('/add-client', verifyToken ,addClient)
 
 
 
-clientRoute.post('/get-client/:clientId', getClient)
+clientRoute.get('/get-client/:clientId', getClient)
 
 
 
-clientRoute.post('/get-clients', verifyToken , getClients)
+clientRoute.get('/get-clients', verifyToken , getClients)
 
 
 
-clientRoute.post('/update-client/:clientId', verifyToken , updateClient)
+clientRoute.put('/update-client/:clientId', verifyToken , updateClient)
 
 
 
-clientRoute.post('/delete-client/:clientId', verifyToken , deleteClient)
+clientRoute.delete('/delete-client/:clientId', verifyToken , deleteClient)
 
 
 

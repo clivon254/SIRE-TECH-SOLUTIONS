@@ -1,12 +1,20 @@
 
-import Testimonial from "../model/testmonials"
-import { errorHandler } from "../utils/error"
+import Client from "../model/clientModel.js"
+import Testimonial from "../model/testmonials.js"
+import { errorHandler } from "../utils/error.js"
 
 
 
 export const addTestimonial = async (req,res,next) => {
     
     const {name,email,content,rate} = req.body
+
+    const isClient = await Client.findOne({email})
+
+    if(!isClient)
+    {
+        return next(errorHandler(401, "You are not allowed to add testimonies ,since you are not our client"))
+    }
 
     const newTestimonial = new Testimonial({
         name,email,content,rate
@@ -29,7 +37,7 @@ export const addTestimonial = async (req,res,next) => {
 
 export const getTestimonial = async (req,res,next) => {
 
-    const {testId} = req.body
+    const {testId} = req.params
 
     const testimonial = await Testimonial.findById(testId)
 
@@ -76,7 +84,7 @@ export const updateTestimonial = async (req,res,next) => {
         return next(errorHandler(401 ,"You are not allowed to update"))
     }
 
-    const {testId} = req.body
+    const {testId} = req.params
 
     const testimonial = await Testimonial.findById(testId)
 
@@ -119,7 +127,7 @@ export const deleteTestimonial = async (req,res,next) => {
         return next(errorHandler(401 ,"You are not allowed to update"))
     }
 
-    const {testId} = req.body
+    const {testId} = req.params
 
     const testimonial = await Testimonial.findById(testId)
 

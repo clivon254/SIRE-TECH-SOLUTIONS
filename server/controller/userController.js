@@ -19,7 +19,7 @@ export const getUser = async (req,res,next) => {
 
     try
     {
-        const {password:pass, ...rest} = await user._documents
+        const {password, ...rest} = await user._doc
 
         res.status(200).json({success:true , rest}) 
 
