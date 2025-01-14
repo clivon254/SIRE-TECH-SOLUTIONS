@@ -11,6 +11,7 @@ import serviceRouter from "./router/serviceRouter.js"
 import projectRouter from "./router/projectRouter.js"
 import taskRouter from "./router/taskRouter.js"
 import testimonialRouter from "./router/testimonialRouter.js"
+import invoiceRouter from "./router/invoiceRouter.js"
 
 
 const app = express()
@@ -55,6 +56,8 @@ app.use('/api/project', projectRouter)
 
 app.use('/api/task', taskRouter)
 
+
+app.use('/api/invoice' , invoiceRouter)
 
 
 

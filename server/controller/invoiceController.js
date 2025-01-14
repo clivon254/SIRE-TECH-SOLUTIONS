@@ -8,7 +8,7 @@ import path from "path";
 
 export const createInvoice = async (req,res,next) => {
 
-    if(req.user.isAdmin)
+    if(!req.user.isAdmin)
     {
         return next(errorHandler(403,"You are not allowed to add an invoice"))
     }
@@ -21,7 +21,7 @@ export const createInvoice = async (req,res,next) => {
         // calculate
         const subtotal = items.reduce((acc,item) => acc + (item.quantity * item.unitPrice), 0)
 
-        const tax = subtotal * (taxRate || 0)
+        const tax = subtotal * (taxRate/100 || 0)
 
         const total = subtotal + tax
 
