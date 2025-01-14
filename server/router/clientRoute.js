@@ -3,7 +3,7 @@
 
 import express from "express"
 import { verifyToken } from "../utils/verify.js"
-import { addClient, deleteClient, getClient, getClients, updateClient } from "../controller/clientController"
+import { addClient, deleteClient, getClient, getClients, updateClient } from "../controller/clientController.js"
 
 
 const clientRoute = express.Router()
