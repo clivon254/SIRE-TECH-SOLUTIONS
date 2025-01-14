@@ -7,7 +7,7 @@ const clientSchema = new mongoose.Schema(
     {
         name:{type:String ,required:true},
 
-        status:{type:boolean , default:false},
+        status:{type:Boolean , default:false},
 
         email:{type:String , required:true},
 

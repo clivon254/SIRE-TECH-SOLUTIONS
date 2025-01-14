@@ -1,5 +1,5 @@
-import Project from "../model/projectModel"
-import { errorHandler } from "../utils/error"
+import Project from "../model/projectModel.js"
+import { errorHandler } from "../utils/error.js"
 
 
  export const addProject = async (req,res,next) => {
