@@ -1,7 +1,7 @@
 
 
 import React, { useContext } from 'react'
-import {BrowserRouter ,Routes,Route,Navigate} from "react-router-dom"
+import {BrowserRouter ,Routes,Route,Navigate, Outlet} from "react-router-dom"
 import { Toaster } from "sonner"
 import {useSelector} from "react-redux"
 import Dashboard from './page/Dashboard'
@@ -9,6 +9,7 @@ import Login from './page/Login'
 import Register from './page/register'
 import Forgotpassword from './page/Forgotpassword'
 import { StoreContext } from './context/store'
+import Resetpassword from './page/Resetpassword'
 
 
 
@@ -21,9 +22,17 @@ const LayOut = () => {
 
   return(
 
-    currentUser?.isAdmin && token ?
+    currentUser && token ?
 
-    <div className=""></div>
+    <div className="">
+
+      <div className=""></div>
+
+      <div className="">
+        <Outlet/>
+      </div>
+
+    </div>
 
     :
 
@@ -58,7 +67,7 @@ export default function App() {
 
               <Route path="/forgot-password" element={<Forgotpassword/>}/>
 
-              <Route path="/reset-password/:token" element={<Login/>}/>
+              <Route path="/reset-password/:token" element={<Resetpassword/>}/>
 
           </Routes>
           

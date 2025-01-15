@@ -116,7 +116,7 @@ export const forgotPassword = async (req,res,next) => {
         const token = jwt.sign(
          {id:user._id },
          process.env.JWT_SECRETE,
-         {expiresIn:'12'}
+         {expiresIn:'2h'}
         )
 
         var transporter = nodemailer.createTransport({

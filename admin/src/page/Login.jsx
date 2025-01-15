@@ -4,17 +4,18 @@
 import React, { useContext, useState } from 'react'
 import LOGIN from "../assets/SIRELOGO.png"
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import { signInFailure, signInStart } from '../redux/user/userSlice'
+import { Link, useNavigate } from 'react-router-dom'
+import { signInFailure, signInStart, signInSuccess, signOutSuccess } from '../redux/user/userSlice'
 import axios from "axios"
 import { StoreContext } from '../context/store'
-
+import { Alert } from "flowbite-react"
+import {toast} from "sonner"
 
 export default function Login() {
 
   const {loading,error} = useSelector(state => state.user)
 
-  const {} = useContext(  StoreContext)
+  const {setToken,url} = useContext(StoreContext)
 
   const [formData ,setFormData] = useState({})
 
@@ -22,7 +23,6 @@ export default function Login() {
 
   const navigate = useNavigate()
 
-  console.log(formData)
 
   // onChange
   const onChange = (e) => {
@@ -36,13 +36,29 @@ export default function Login() {
 
     e.preventDefault()
 
-    dispatch(signInStart())
-
     try
     {
 
-      const res = await axios.post()
+      dispatch(signInStart())
 
+      const res = await axios.post(url + "/api/auth/login",formData)
+
+        if(res.data.success)
+        {
+
+          dispatch(signInSuccess(res.data.rest))
+
+          toast.success("You have login successfully")
+
+          localStorage.setItem("token", res.data.token)
+
+          setToken(res.data.token)
+
+          navigate('/')
+
+          setFormData({})
+
+        }
 
     }
     catch(error)
@@ -65,9 +81,9 @@ export default function Login() {
 
   return (
 
-    <div className="w-full flex items-center justify-center min-h-screen">
+    <div className="w-full min-h-screen flexCenter max-w-xl mx-auto">
 
-        <div className="flex flex-col w-full gap-y-5">
+        <div className="w-full flex flex-col gap-y-6">
 
           {/* header */}
           <div className="flex flex-col items-center gap-y-5">
@@ -78,23 +94,23 @@ export default function Login() {
               className=" h-20 w-60" 
             />
 
-            <h1 className="">Sign in</h1>
+            <h1 className="title2">Sign in</h1>
 
           </div>
 
           {/* form */}
-          <div className="">
+          <div className="w-full flex flex-col gap-y-3 px-5">
 
-            <form onSubmit={handleSubmit} className="flex flex-col gap-y-5 max-w-xl px-5">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-y-5 ">
 
               {/* email */}
               <div className="flex flex-col gap-y-2">
 
-               <label htmlFor="" className="">Email</label>
+               <label htmlFor="" className="label">Email</label>
 
                <input 
                   type="email" 
-                  className="" 
+                  className="input" 
                   value={formData.email}
                   onChange={onChange}
                   name="email"
@@ -106,11 +122,11 @@ export default function Login() {
               {/* password */}
              <div className="flex flex-col gap-y-2">
 
-               <label htmlFor="" className="">Password</label>
+               <label htmlFor="" className="label">Password</label>
 
                <input 
                   type="password" 
-                  className="" 
+                  className="input" 
                   value={formData.password}
                   onChange={onChange}
                   name="password"
@@ -121,20 +137,38 @@ export default function Login() {
 
               <div className="flex items-center justify-between">
 
-                <span className="">forgot password?</span>
+                <span className="text-sm font-semibold hover:text-primary">
 
-                <span className="">Already have an account</span>
+                  <Link to="/forgot-password">
+                    forgot password?
+                  </Link>
 
+                </span>
               </div>
 
               {/* button */}
               <button 
-                className=""
+                className="btn"
                 disabled={loading}
                 type="submit"
               >
-                {loading ? 'Loading...' : 'Sign in'}
+                {loading ? 
+
+                  <div className="flexCenter gap-x-2">
+
+                    <span className="load"/> loading ...
+
+                  </div>
+                 : 
+                 'Sign in'
+                 }
               </button>
+
+              {error && (
+
+                <Alert color="failure">{error}</Alert>
+
+              )}
 
             </form>
 
