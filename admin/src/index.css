@@ -54,3 +54,15 @@
 {
     @apply flex justify-center items-center
 }
+
+/* active-navs */
+.active-nav
+{
+    @apply flex items-center gap-x-2 font-title p-2
+}
+
+.active-nav-link
+{
+    @apply flex items-center gap-x-2  font-title p-2 bg-red-50 text-primary 
+    rounded-md font-semibold
+}

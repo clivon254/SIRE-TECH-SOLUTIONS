@@ -10,6 +10,15 @@ import Register from './page/register'
 import Forgotpassword from './page/Forgotpassword'
 import { StoreContext } from './context/store'
 import Resetpassword from './page/Resetpassword'
+import Header from './components/Header'
+import Profile from './page/Profile'
+import SideBar from './components/SideBar'
+import Projects from './page/Projects'
+import Services from './page/Services'
+import Task from './page/Task'
+import Invoices from './page/Invoices'
+import Clients from './page/Clients'
+import PossibleClients from './page/PossibleClients'
 
 
 
@@ -24,12 +33,21 @@ const LayOut = () => {
 
     currentUser && token ?
 
-    <div className="">
+    <div className="w-full h-screen flex ">
 
-      <div className=""></div>
+      {/* sidebar */}
+      <div className="px-3 hidden lg:block w-1/5">
 
-      <div className="">
+          <SideBar/>
+
+      </div>
+
+      <div className="w-full lg:w-4/5">
+
+        <Header/>
+
         <Outlet/>
+
       </div>
 
     </div>
@@ -58,6 +76,20 @@ export default function App() {
               <Route element={<LayOut/>}>
 
                   <Route path="/" element={<Dashboard/>}/>
+
+                  <Route path="/profile" element={<Profile/>}/>
+
+                  <Route path="/projects" element={<Projects/>}/>
+
+                  <Route path="/services" element={<Services/>}/>
+
+                  <Route path="/tasks" element={<Task/>}/>
+
+                  <Route path="/invoices" element={<Invoices/>}/>
+
+                  <Route path="/clients" element={<Clients/>}/>
+
+                  <Route path="/possible-clients" element={<PossibleClients/>}/>
               
               </Route>
 

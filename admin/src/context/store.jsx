@@ -6,6 +6,9 @@ import { createContext, useEffect, useState } from "react"
 
 export const StoreContext = createContext(null)
 
+
+
+
 export default function StoreContextProvider(props)
 {
 
@@ -13,10 +16,8 @@ export default function StoreContextProvider(props)
 
     const [token,setToken] = useState(localStorage.getItem("token"))
 
-    const contextValue = {
-        url,
-        token, setToken
-    }
+    const [openSidebar , setOpenSidebar] = useState(false)
+
 
     useEffect (() => {
 
@@ -27,6 +28,12 @@ export default function StoreContextProvider(props)
         }
 
     },[token])
+
+    const contextValue = {
+        url,
+        token, setToken,
+        openSidebar, setOpenSidebar,
+    }
 
     return(
 
