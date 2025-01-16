@@ -16,7 +16,8 @@ export default {
         'primary': '#C70000',
         'secondary':"#000",
         'blue':"#121fba",
-        'green':"#12ba51"
+        'green':"#12ba51",
+        "purple":"#8F05F1"
       },
 
       fontFamily:{

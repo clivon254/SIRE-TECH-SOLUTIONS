@@ -19,13 +19,18 @@ export default function StoreContextProvider(props)
 
     const [openSidebar , setOpenSidebar] = useState(false)
 
+    const [openDelete ,setOpenDelete] = useState(false)
+
     const [clients , setClients] = useState([])
 
     const [clientsLoading , setClientsLoading] = useState(false)
 
     const [clientsError , setClientsError] = useState(false)
 
+    const [clientQuery ,setClientQuery] = useState(false)
 
+
+    
 
     // fetch Client
     const fetchClients = async () => {
@@ -36,7 +41,7 @@ export default function StoreContextProvider(props)
 
             setClientsError(false)
 
-            const res = await axios.get(url + "/api/client/get-clients",{headers:{token}})
+            const res = await axios.get(url + `/api/client/get-clients?query=${clientQuery}`,{headers:{token}})
 
             if(res.data.success)
             {
@@ -57,7 +62,6 @@ export default function StoreContextProvider(props)
 
     }
 
-    console.log(clients)
 
     useEffect (() => {
 
@@ -69,7 +73,6 @@ export default function StoreContextProvider(props)
 
     },[token])
 
-
     useEffect(() => {
 
         fetchClients()
@@ -77,13 +80,22 @@ export default function StoreContextProvider(props)
     },[])
 
 
+    useEffect(() => {
+
+        fetchClients()
+
+    },[clientQuery])
+
+
     const contextValue = {
         url,
         token, setToken,
         openSidebar, setOpenSidebar,
+        openDelete,setOpenDelete,
         clients,setClients,
         clientsLoading, setClientsLoading,
         clientsError,setClientsError,
+        clientQuery,setClientQuery,
         fetchClients
     }
 

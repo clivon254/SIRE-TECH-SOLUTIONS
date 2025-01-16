@@ -37,6 +37,11 @@ export const getClient = async (req,res,next) => {
 
     const {clientId} = req.params
 
+    if(!clientId || clientId === "")
+    {
+        return next(errorHandler(400 ,'an Id is required'))
+    }
+
     const client = await Client.findById(clientId)
 
     if(!client)
@@ -59,14 +64,19 @@ export const getClient = async (req,res,next) => {
 
 export const getClients = async (req,res,next) => {
 
+
     if(!req.user.isAdmin)
     {
         return next(errorHandler(403,"Your are not allowed to see all the clients"))
     }
 
+    const {query} = req.query
+
     try
     {
-        const clients = await Client.find().sort({_id:-1})
+        const clients = await Client.find({
+            ...(query && {status :query})
+        }).sort({_id:-1})
 
         res.status(200).json({success:true , clients})
 

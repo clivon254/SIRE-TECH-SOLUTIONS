@@ -21,6 +21,8 @@ import Clients from './page/Clients'
 import PossibleClients from './page/PossibleClients'
 import AddClients from './page/AddClients'
 import UpdateClients from './page/UpdateClients'
+import ClientPage from './page/ClientPage'
+import Delete from './components/Delete'
 
 
 
@@ -65,6 +67,8 @@ const LayOut = () => {
 
 export default function App() {
 
+  const {openDelete} = useContext(StoreContext)
+
   return (
 
       <BrowserRouter>
@@ -97,6 +101,8 @@ export default function App() {
 
                   <Route path="/update-client/:clientId" element={<UpdateClients/>}/>
 
+                  <Route path="/client/:clientId" element={<ClientPage/>}/>
+
               </Route>
 
               <Route path="/login" element={<Login/>}/>
@@ -108,8 +114,11 @@ export default function App() {
               <Route path="/reset-password/:token" element={<Resetpassword/>}/>
 
           </Routes>
+
           
         </main>
+
+      
 
       </BrowserRouter>
   )
