@@ -81,7 +81,7 @@ export const updateUser = async (req,res,next) => {
     try
     {
 
-        const updateUser = await User.findByIdAndUpdate(
+        const updatedUser = await User.findByIdAndUpdate(
             userId,
             {
                 $set:
@@ -96,7 +96,7 @@ export const updateUser = async (req,res,next) => {
             {new:true}
         )
 
-        const {pass:password , ...rest} = await updateUser._doc
+        const {password , ...rest} = await updatedUser._doc
 
         res.status(200).json({success:true , rest})
     }

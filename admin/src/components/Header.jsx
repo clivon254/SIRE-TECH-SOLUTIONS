@@ -29,7 +29,7 @@ export default function Header() {
 
     dispatch(signOutSuccess())
 
-    navigate('/')
+    navigate('/login')
     
   }
 
@@ -61,7 +61,7 @@ export default function Header() {
                         label={
                             <Avatar
                                 alt="user"
-                                img={currentUser.profilePicture}
+                                img={currentUser?.profilePicture}
                                 rounded
                             />
                         }

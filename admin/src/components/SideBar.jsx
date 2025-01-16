@@ -1,6 +1,6 @@
 
 
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import LOGO from "../assets/SIRELOGO.png"
 import { MdOutlineDashboard } from "react-icons/md";
 import { FiUsers } from "react-icons/fi";
@@ -10,9 +10,12 @@ import { VscSaveAll } from "react-icons/vsc";
 import { VscServerEnvironment } from "react-icons/vsc";
 import { MdOutlineTask } from "react-icons/md";
 import { NavLink } from 'react-router-dom';
+import { StoreContext } from '../context/store';
 
 
 export default function SideBar() {
+
+    const {setOpenSidebar} = useContext(StoreContext)
 
     const [NavLinks ,setNavLinks] = useState([
         {
@@ -53,6 +56,7 @@ export default function SideBar() {
         
     ])
 
+
   return (
 
     <aside className="space-y-8">
@@ -76,6 +80,7 @@ export default function SideBar() {
                     <NavLink
                         key={index}
                         to={`${nav.path}`}
+                        onClick={() => setOpenSidebar(false)}
                         className={({isActive}) => isActive ? "active-nav-link":"active-nav"}
                     >
 
