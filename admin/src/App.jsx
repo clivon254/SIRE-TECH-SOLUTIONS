@@ -19,6 +19,8 @@ import Task from './page/Task'
 import Invoices from './page/Invoices'
 import Clients from './page/Clients'
 import PossibleClients from './page/PossibleClients'
+import AddClients from './page/AddClients'
+import UpdateClients from './page/UpdateClients'
 
 
 
@@ -90,7 +92,11 @@ export default function App() {
                   <Route path="/clients" element={<Clients/>}/>
 
                   <Route path="/possible-clients" element={<PossibleClients/>}/>
-              
+
+                  <Route path="/add-client" element={<AddClients/>}/>
+
+                  <Route path="/update-client/:clientId" element={<UpdateClients/>}/>
+
               </Route>
 
               <Route path="/login" element={<Login/>}/>

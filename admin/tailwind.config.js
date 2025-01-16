@@ -14,7 +14,9 @@ export default {
 
       colors:{
         'primary': '#C70000',
-        'secondary':"#000"
+        'secondary':"#000",
+        'blue':"#121fba",
+        'green':"#12ba51"
       },
 
       fontFamily:{

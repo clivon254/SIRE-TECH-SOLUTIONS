@@ -41,7 +41,7 @@
 
 .btn3
 {
-    @apply bg-blue-700 disabled:opacity-50 text-white py-3 px-2 font-semibold
+    @apply bg-blue disabled:opacity-50 text-white py-3 px-2 font-semibold
 }
 
 .input
@@ -57,6 +57,11 @@
 .load
 {
     @apply h-7 w-7 rounded-full animate-spin border-2 border-t-black border-white
+}
+
+.loading
+{
+    @apply bg-slate-300 animate-pulse block
 }
 
 .flexCenter

@@ -46,7 +46,7 @@ export const getClient = async (req,res,next) => {
 
     try
     {
-        res.status(200).json({sucess:true , client})
+        res.status(200).json({success:true , client})
     }
     catch(error)
     {

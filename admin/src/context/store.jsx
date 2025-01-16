@@ -28,7 +28,7 @@ export default function StoreContextProvider(props)
 
 
     // fetch Client
-    const fetchClient = async () => {
+    const fetchClients = async () => {
 
         try
         {
@@ -57,6 +57,7 @@ export default function StoreContextProvider(props)
 
     }
 
+    console.log(clients)
 
     useEffect (() => {
 
@@ -71,7 +72,7 @@ export default function StoreContextProvider(props)
 
     useEffect(() => {
 
-        fetchClient()
+        fetchClients()
 
     },[])
 
@@ -83,7 +84,7 @@ export default function StoreContextProvider(props)
         clients,setClients,
         clientsLoading, setClientsLoading,
         clientsError,setClientsError,
-        fetchClient
+        fetchClients
     }
 
     return(
