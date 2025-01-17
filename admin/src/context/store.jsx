@@ -41,6 +41,51 @@ export default function StoreContextProvider(props)
 
     const [projectsError , setProjectsError] = useState(false)
 
+    const [tasks ,setTasks] = useState([])
+
+    const [tasksLoading , setTasksLoading] = useState(false)
+
+    const [tasksError  , setTasksError] = useState(false)
+
+    const [users ,setUsers] = useState([])
+
+    const [usersLoading , setUsersLoading] = useState(false)
+
+    const [usersError , setUsersError] = useState(false)
+    
+
+    // fetchTask
+    const fetchTasks = async () => {
+
+        try
+        {
+            setTasksError(false)
+
+            setTasksLoading(true)
+
+            const res = await axios.get(url + "/api/task/get-tasks")
+
+            if(res.data.success)
+            {
+                setTasks(res.data.tasks)
+
+                setTasksError(false)
+
+                setTasksLoading(false)
+            }
+
+        }
+        catch(error)
+        {
+            console.log(error.message)
+
+            setTasksLoading(false)
+
+            setTasksError(true)
+        }
+
+    }
+
 
     // fetch Client
     const fetchClients = async () => {
@@ -130,6 +175,37 @@ export default function StoreContextProvider(props)
 
     }
 
+    // fetchUsers
+    const fetchUsers = async () => {
+
+        try
+        {
+            setUsersLoading(true)
+
+            setUsersError(false)
+
+            const res = await axios.get(url + "/api/user/get-users",{headers:{token}})
+
+            if(res.data.success)
+            {
+                setUsersLoading(false)
+
+                setUsers(res.data.usersWithOutPasswords)
+            }
+
+        }
+        catch(error)
+        {
+            setUsersLoading(false)
+
+            setUsersError(true)
+
+            console.log(error.message)
+
+        }
+
+    }
+
 
 
     useEffect (() => {
@@ -142,6 +218,7 @@ export default function StoreContextProvider(props)
 
     },[token])
 
+
     useEffect(() => {
 
         fetchClients()
@@ -150,11 +227,13 @@ export default function StoreContextProvider(props)
 
         fetchProjects()
 
+        fetchTasks()
+
+        fetchUsers()
+
     },[])
 
-
-
-    console.log(projects)
+    console.log(tasks)
 
 
     const contextValue = {
@@ -174,7 +253,14 @@ export default function StoreContextProvider(props)
         projects,setProjects,
         projectsLoading, setProjectsLoading,
         projectsError, setProjectsError,
-        fetchProjects
+        fetchProjects,
+        tasks, setTasks,
+        tasksError, setTasksError,
+        fetchTasks,
+        users, setUsers,
+        usersLoading, setUsersLoading,
+        usersError, setUsersError,
+        fetchUsers,
     }
 
     return(

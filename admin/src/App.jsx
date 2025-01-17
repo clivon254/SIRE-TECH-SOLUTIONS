@@ -27,6 +27,8 @@ import AddService from './page/AddService'
 import UpdateService from './page/UpdateService'
 import AddProject from './page/AddProject'
 import UpdateProject from './page/UpdateProject'
+import AddTask from './page/AddTask'
+import UpdateTask from './page/UpdateTask'
 
 
 
@@ -102,6 +104,10 @@ export default function App() {
                   <Route path="/update-service/:serviceId" element={<UpdateService/>}/>
 
                   <Route path="/tasks" element={<Task/>}/>
+
+                  <Route path="/add-task" element={<AddTask/>}/>
+
+                  <Route path="/update-task/:taskId" element={<UpdateTask/>}/>
 
                   <Route path="/invoices" element={<Invoices/>}/>
 
