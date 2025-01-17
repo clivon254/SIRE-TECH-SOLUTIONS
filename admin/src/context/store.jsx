@@ -29,8 +29,12 @@ export default function StoreContextProvider(props)
 
     const [clientQuery ,setClientQuery] = useState(false)
 
+    const [services ,setServices] = useState([])
 
-    
+    const [servicesLoading ,setServicesLoading] = useState(false)
+
+    const [servicesError ,setServicesError] = useState(false)
+
 
     // fetch Client
     const fetchClients = async () => {
@@ -62,6 +66,34 @@ export default function StoreContextProvider(props)
 
     }
 
+    // fetchServices
+    const fetchServices = async () => {
+
+        try
+        {
+            setServicesLoading(true)
+
+            setServicesError(false)
+
+            const res = await axios.get(url + "/api/service/get-services")
+
+            if(res.data.success)
+            {
+                setServicesLoading(false)
+
+                setServices(res.data.services)
+            }
+
+        }
+        catch(error)
+        {
+            setServicesLoading(false)
+
+            setServicesError(true)
+        }
+
+    }
+
 
     useEffect (() => {
 
@@ -77,6 +109,8 @@ export default function StoreContextProvider(props)
 
         fetchClients()
 
+        fetchServices()
+
     },[])
 
 
@@ -85,6 +119,8 @@ export default function StoreContextProvider(props)
         fetchClients()
 
     },[clientQuery])
+
+    console.log(services)
 
 
     const contextValue = {
@@ -96,7 +132,11 @@ export default function StoreContextProvider(props)
         clientsLoading, setClientsLoading,
         clientsError,setClientsError,
         clientQuery,setClientQuery,
-        fetchClients
+        fetchClients,
+        services, setServices,
+        servicesLoading, setServicesLoading,
+        servicesError, setServicesError,
+        fetchServices
     }
 
     return(

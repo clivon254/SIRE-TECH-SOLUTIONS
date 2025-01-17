@@ -23,6 +23,8 @@ import AddClients from './page/AddClients'
 import UpdateClients from './page/UpdateClients'
 import ClientPage from './page/ClientPage'
 import Delete from './components/Delete'
+import AddService from './page/AddService'
+import UpdateService from './page/UpdateService'
 
 
 
@@ -88,6 +90,10 @@ export default function App() {
                   <Route path="/projects" element={<Projects/>}/>
 
                   <Route path="/services" element={<Services/>}/>
+
+                  <Route path="/add-service" element={<AddService/>}/>
+
+                  <Route path="/update-service/:serviceId" element={<UpdateService/>}/>
 
                   <Route path="/tasks" element={<Task/>}/>
 
