@@ -4,11 +4,12 @@ import React, { useContext, useEffect, useState } from 'react'
 import { StoreContext } from '../context/store'
 import {IoMdAdd} from "react-icons/io"
 import {Link} from "react-router-dom"
-import { Table } from 'flowbite-react'
+import { Table, TableBody } from 'flowbite-react'
 import { FaEdit, FaTrashAlt } from 'react-icons/fa'
 import Delete from '../components/Delete'
 import axios from 'axios'
 import { toast } from 'sonner'
+import Error from '../components/Error'
 
 
 
@@ -23,6 +24,8 @@ export default function Projects() {
   const [fetchProjectLoading , setFetchProjectLoading] = useState(false)
 
   const [fetchProjectError , setFetchProjectError] = useState(false)
+
+  const [loader , setLoader]  = useState([{},{},{},{},{}])
 
   // fetchProject
   const fetchProject = async () => {
@@ -203,7 +206,9 @@ export default function Projects() {
 
                           <Table.Row>
 
-                             <Table.Cell>{index +1}</Table.Cell>
+                             <Table.Cell>
+                                {index + 1}
+                             </Table.Cell>
 
                               <Table.Cell>{project.title}</Table.Cell>
 
@@ -259,6 +264,74 @@ export default function Projects() {
                 </>
 
               )}
+
+              {projectsLoading && !projectsError && (
+
+                <>
+                    {loader.map((loader,index) => (
+
+                        <Table.Body>
+
+                          <Table.Row>
+
+                             <Table.Cell>
+                               <span className="loading h-5 w-4 rounded-md"/>
+                             </Table.Cell>
+
+                              <Table.Cell>
+                                <span className="loading h-5 w-20 rounded-md"/>
+                              </Table.Cell>
+
+                              <Table.Cell className="">
+                                <span className="loading h-5 w-6 rounded-md"/>
+                              </Table.Cell>
+
+                              <Table.Cell>
+                                <span className="loading h-5 w-8 rounded-full"/>
+                              </Table.Cell>
+                              
+                              <Table.Cell>
+                               <span className="loading h-5 w-8 rounded-full"/>
+                              </Table.Cell>
+
+                              <Table.Cell>
+
+                                <div className="flex gap-x-2 items-center">
+
+                                  <span className="loading h-5 w-5 rounded-full"/>
+
+                                  <span className="loading h-5 w-4 rounded-full"/>
+
+                                </div>
+
+                              </Table.Cell>
+
+                          </Table.Row>
+
+                        </Table.Body>
+
+                    ))}
+                </>
+
+              )}
+
+              {projectsError && (
+
+                <TableBody>
+
+                  <Table.Row>
+
+                    <Table.Cell>
+
+                      <Error retry={fetchProjects}/>
+
+                    </Table.Cell>
+
+                  </Table.Row>
+
+                </TableBody>
+              )}
+
             </Table>
 
           </div>

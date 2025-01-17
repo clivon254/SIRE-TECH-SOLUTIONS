@@ -10,10 +10,10 @@ import { errorHandler } from "../utils/error.js"
         return next(errorHandler(403, "You are not allowed to add projects"))
     }
 
-    const {title,description,client,status,tools,startDate,dueDate,url} = req.body
+    const {title,description,client,image,tools,startDate,dueDate,url} = req.body
 
     const newProject = new Project({
-        title,description,client,status,tools,startDate,dueDate,url
+        title,description,client,tools,image,startDate,dueDate,url
     })
 
     try
@@ -102,6 +102,7 @@ import { errorHandler } from "../utils/error.js"
                     status:req.body.status,
                     tools:req.body.tools,
                     url:req.body.url,
+                    image:req.body.image,
                 }
             },
             {new:true}

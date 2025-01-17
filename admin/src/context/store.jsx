@@ -51,7 +51,7 @@ export default function StoreContextProvider(props)
 
             setClientsError(false)
 
-            const res = await axios.get(url + `/api/client/get-clients?query=${clientQuery}`,{headers:{token}})
+            const res = await axios.get(url + `/api/client/get-clients`,{headers:{token}})
 
             if(res.data.success)
             {
@@ -153,11 +153,6 @@ export default function StoreContextProvider(props)
     },[])
 
 
-    useEffect(() => {
-
-        fetchClients()
-
-    },[clientQuery])
 
     console.log(projects)
 

@@ -50,7 +50,11 @@ export default function AddService() {
         }
 
 
+        setfileUploadProgress(null)
+
         setFileUploadError(null)
+
+        setFileUploading(true)
 
         try
         {

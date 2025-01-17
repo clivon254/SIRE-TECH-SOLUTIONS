@@ -9,11 +9,13 @@ const projectSchema = new mongoose.Schema(
 
         description:{type:String ,required:true},
 
+        image:{type:String ,required:true},
+
         client:{type:mongoose.Schema.Types.ObjectId , ref:'Client'},
 
         url:{type:String ,required:true},
 
-        status:{type:String , enum:['Ongoing','On Hold','Completed']},
+        status:{type:String , default:"On Hold", enum:['Ongoing','On Hold','Completed']},
 
         startDate:{type:Date ,required:true},
 
