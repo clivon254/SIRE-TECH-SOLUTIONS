@@ -152,7 +152,7 @@ export default function AddService() {
 
   return (
     
-    <section className="section space-y-6">
+    <section className="section space-y-8 max-w-2xl mx-auto">
 
         <h2 className="title2 text-center">Add Service</h2>
 

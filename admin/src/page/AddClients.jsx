@@ -76,7 +76,7 @@ export default function AddClients() {
 
   return (
 
-    <section className="section space-y-8">
+    <section className="section space-y-8 max-w-2xl mx-auto">
 
         <h2 className="text-center title2">Add Client</h2>
 

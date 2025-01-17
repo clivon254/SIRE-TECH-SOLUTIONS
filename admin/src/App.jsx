@@ -25,6 +25,8 @@ import ClientPage from './page/ClientPage'
 import Delete from './components/Delete'
 import AddService from './page/AddService'
 import UpdateService from './page/UpdateService'
+import AddProject from './page/AddProject'
+import UpdateProject from './page/UpdateProject'
 
 
 
@@ -88,6 +90,10 @@ export default function App() {
                   <Route path="/profile" element={<Profile/>}/>
 
                   <Route path="/projects" element={<Projects/>}/>
+
+                  <Route path="/update-project/:projectId" element={<UpdateProject/>}/>
+
+                  <Route path="/add-project" element={<AddProject/>}/>
 
                   <Route path="/services" element={<Services/>}/>
 

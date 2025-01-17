@@ -35,6 +35,12 @@ export default function StoreContextProvider(props)
 
     const [servicesError ,setServicesError] = useState(false)
 
+    const [projects , setProjects] = useState([])
+
+    const [projectsLoading , setProjectsLoading] = useState(false)
+
+    const [projectsError , setProjectsError] = useState(false)
+
 
     // fetch Client
     const fetchClients = async () => {
@@ -94,6 +100,37 @@ export default function StoreContextProvider(props)
 
     }
 
+    // fetchProjects
+    const fetchProjects = async () => {
+
+        try
+        {
+            setProjectsLoading(true)
+
+            setProjectsError(false)
+
+            const res = await axios.get(url + "/api/project/get-projects")
+
+            if(res.data.success)
+            {
+                setProjectsLoading(false)
+
+                setProjects(res.data.projects)
+            }
+
+        }
+        catch(error)
+        {
+            projectsError(true)
+
+            projectsLoading(false)
+
+            console.log(error.message)
+        }
+
+    }
+
+
 
     useEffect (() => {
 
@@ -111,6 +148,8 @@ export default function StoreContextProvider(props)
 
         fetchServices()
 
+        fetchProjects()
+
     },[])
 
 
@@ -120,7 +159,7 @@ export default function StoreContextProvider(props)
 
     },[clientQuery])
 
-    console.log(services)
+    console.log(projects)
 
 
     const contextValue = {
@@ -136,7 +175,11 @@ export default function StoreContextProvider(props)
         services, setServices,
         servicesLoading, setServicesLoading,
         servicesError, setServicesError,
-        fetchServices
+        fetchServices,
+        projects,setProjects,
+        projectsLoading, setProjectsLoading,
+        projectsError, setProjectsError,
+        fetchProjects
     }
 
     return(
